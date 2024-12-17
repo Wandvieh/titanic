@@ -1,4 +1,4 @@
-# %%
+# %% Getting to know the data
 import pandas as pd
 import numpy as np
 from matplotlib.pyplot import subplots
@@ -39,7 +39,7 @@ df.SibSp = pd.Series(df.SibSp, dtype='category')
 df.Parch = pd.Series(df.Parch, dtype='category')
 print(df.dtypes)
 
-# %% Visualisierungen
+# %% Erste Visualisierungen
 """
 PassengerId      int64
 Survived         int64
@@ -49,13 +49,28 @@ Age            float64
 SibSp         category
 Parch         category
 """
-fig, ax = subplots(figsize=(8, 8))
+pd.plotting.scatter_matrix(df)
+
+#fig, ax = subplots(figsize=(8, 8))
 
 #df.boxplot(col, by='Survived', ax=ax)
 #fig.show()
-df.hist('Age', by='Survived', ax=ax)
+#df.hist('Age', by='Survived', ax=ax)
+#fig.show()
+
+# %% Erster Test: Visualisierungen mit verschiedenen Farben
+fig, ax = subplots(figsize=(8, 8))
+# Die Rows filtern, die Survived 0 bzw 1 sind
+df_positive = df.loc[lambda df: df['Survived'] == 1, :]
+df_negative = df.loc[lambda df: df['Survived'] == 0, :]
+ax.plot(df_positive['Age'], df_positive['Sex'], 'o', fillstyle='none', markersize=15.0)
+ax.plot(df_negative['Age'], df_negative['Sex'], 'o', fillstyle='none')
 fig.show()
 
+# %% Der Versuch, ein kumullatives Line Chart zu bauen (für die relativen Überlebenschancen nach Alter)
+fig, ax = subplots(figsize=(8, 8))
+df.boxplot('Age', by='Survived', ax=ax)
 
+#klappt nicht so recht
 
 # %%

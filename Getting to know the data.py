@@ -4,6 +4,7 @@ import numpy as np
 from matplotlib.pyplot import subplots
 
 df = pd.read_csv("train.csv")
+original_df = df.copy()
 
 # Größe des DataFrames
 print(df.shape) # 12 columns, 891 rows
@@ -33,11 +34,12 @@ for col in df[['Sex', 'Ticket']].columns:
 """
 
 # Pclass zu categorical umformen
+"""df.Survived = pd.Series(df.Survived, dtype='category')
 df.Pclass = pd.Series(df.Pclass, dtype='category')
 df.Sex = pd.Series(df.Sex, dtype='category')
 df.SibSp = pd.Series(df.SibSp, dtype='category')
 df.Parch = pd.Series(df.Parch, dtype='category')
-print(df.dtypes)
+print(df.dtypes)"""
 
 # %% Erste Visualisierungen
 """
@@ -49,7 +51,7 @@ Age            float64
 SibSp         category
 Parch         category
 """
-pd.plotting.scatter_matrix(df)
+pd.plotting.scatter_matrix(df, diagonal='kde')
 
 #fig, ax = subplots(figsize=(8, 8))
 

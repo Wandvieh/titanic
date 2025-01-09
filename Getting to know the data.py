@@ -2,6 +2,8 @@
 import pandas as pd
 import numpy as np
 from matplotlib.pyplot import subplots
+import statsmodels.api as sm
+from ISLP.models import (ModelSpec as MS, summarize)
 
 df = pd.read_csv("train.csv")
 original_df = df.copy()
@@ -75,4 +77,43 @@ df.boxplot('Age', by='Survived', ax=ax)
 
 #klappt nicht so recht
 
+# %% Simple Linear Regression auf allen möglichen Variablen mit Plotting
+
+def abline(ax, b, m, *args, **kwargs):
+    "Add a line with slope m and intercept b to ax"
+    xlim = ax.get_xlim()
+    ylim = [m * xlim[0] + b, m * xlim[1] + b]
+    ax.plot(xlim, ylim, *args, **kwargs)
+
+y = df['Survived']
+for column in ['PassengerId', 'Pclass', 'Age', 'Sex', 'SibSp', 'Parch', 'Fare', 'Embarked']:
+    X = pd.DataFrame({'intercept': np.ones(df.shape[0]),
+                      'Pclass': df[column]})
+    model = sm.OLS(y,X, missing='drop') # ordinary least squares model
+    results = model.fit()
+    print("Modell für {0}:\n".format(column), summarize(results))
+
+    ax = df.plot.scatter(column, "Survived")
+    abline(ax, results.params[0], results.params[1], 'r--', linewidth=3)
+
+
+# %% Multiple linear regression
+X_2 = MS(['Pclass', 'Age', 'Sex', 'SibSp']).fit_transform(df)
+model_2 = sm.OLS(y,X_2,missing='drop')
+results_2 = model_2.fit()
+summarize(results_2)
+
+# %%
+X_3 = MS(['Pclass', 'Parch', 'Fare']).fit_transform(df)
+model_3 = sm.OLS(y,X_3,missing='drop')
+results_3 = model_3.fit()
+summarize(results_3)
+#%%
+print(df)
+# %%
+df['Survived'] = df['Survived'].astype("category")
+df['Pclass'] = df['Pclass'].astype("category")
+df['Sex'] = df['Sex'].astype("category")
+df['Embarked'] = df['Embarked'].astype("category")
+print(df.info())
 # %%

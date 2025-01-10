@@ -108,12 +108,15 @@ X_3 = MS(['Pclass', 'Parch', 'Fare']).fit_transform(df)
 model_3 = sm.OLS(y,X_3,missing='drop')
 results_3 = model_3.fit()
 summarize(results_3)
-#%%
-print(df)
 # %%
 df['Survived'] = df['Survived'].astype("category")
 df['Pclass'] = df['Pclass'].astype("category")
 df['Sex'] = df['Sex'].astype("category")
 df['Embarked'] = df['Embarked'].astype("category")
 print(df.info())
+# %% Boxplots for categorization
+for column in ['Pclass', 'Age', 'SibSp', 'Parch', 'Fare']:
+    fig, ax = subplots(figsize=(8, 8))
+    df.boxplot(column, by='Survived', ax=ax)
+
 # %%

@@ -53,7 +53,10 @@ Age            float64
 SibSp         category
 Parch         category
 """
-pd.plotting.scatter_matrix(df, diagonal='kde')
+columns = ['PassengerId', 'Pclass', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked']
+colors = {0: 'orange', 1: 'purple'}
+color_list = [colors[group] for group in df_nomissing['Survived']]
+pd.plotting.scatter_matrix(df_nomissing[columns], diagonal='kde', c=df_nomissing['Survived'])
 
 #fig, ax = subplots(figsize=(8, 8))
 

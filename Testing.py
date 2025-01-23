@@ -55,7 +55,6 @@ Parch         category
 """
 columns = ['PassengerId', 'Pclass', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked']
 colors = {0: 'orange', 1: 'purple'}
-color_list = [colors[group] for group in df_nomissing['Survived']]
 pd.plotting.scatter_matrix(df_nomissing[columns], diagonal='kde', c=df_nomissing['Survived'])
 
 #fig, ax = subplots(figsize=(8, 8))
@@ -81,6 +80,8 @@ df.boxplot('Age', by='Survived', ax=ax)
 #klappt nicht so recht
 
 # %% Simple Linear Regression auf allen möglichen Variablen mit Plotting
+
+
 
 def abline(ax, b, m, *args, **kwargs):
     "Add a line with slope m and intercept b to ax"

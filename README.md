@@ -1,24 +1,26 @@
 # Titantic Dataset
 
-Original on kaggle{https://www.kaggle.com/competitions/titanic}
+[Kaggle competition](https://www.kaggle.com/competitions/titanic)
 
-things to try out still
-- Converting Cabin also into its Number and add an interaction term between the two
+## Final results
 
-methods to use
+Will be posted here as soon as I have them
+
+## My To Do List
+Models
 - Logistic Regression
 - Poisson Regression
 - LDA
 - QDA
 
-extensions of those methods
-- interaction terms
+Extensions
+- interaction terms (e.g. between the Cabin Letters and their numbers - but there are so many missing entries that it probably won't be important)
 - polynomial methods
 
-validations to use on all methods
+Validations
 - bootstrap
 - 5fold / 10fold CV
 
-methods to evaluate
+Other considerations
 - does the data have a gaussian distribution? -> if not, logistic regression will work better than LDA
 - do the variables have a common covariance matrix? -> if not, logistic regression will work better than LDA

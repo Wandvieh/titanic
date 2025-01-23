@@ -1,3 +1,7 @@
+# Titantic Dataset
+
+Original on kaggle{https://www.kaggle.com/competitions/titanic}
+
 things to try out still
 - Converting Cabin also into its Number and add an interaction term between the two
 

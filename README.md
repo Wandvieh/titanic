@@ -8,6 +8,7 @@ Will be posted here as soon as I have them
 
 ## My To Do List
 Models
+- Least Squares Regression
 - Logistic Regression
 - Poisson Regression
 - LDA
